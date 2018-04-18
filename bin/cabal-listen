@@ -1,0 +1,31 @@
+#! /bin/bash
+
+scriptDir="$( cd "$( dirname "$0"  )" && pwd  )"
+
+PID_FILE=$scriptDir/../var/cabal.pid
+
+if [ -e $PID_FILE ]
+then
+    cabal_pid=`cat $PID_FILE`
+    echo "kill ${cabal_pid}" 
+    kill -9 $cabal_pid
+fi
+echo "start server..."
+
+$scriptDir/cabal -e dev start &
+
+sleep 1
+echo "watching files..."
+fswatch $scriptDir/../ -i "*\\.php" | while read file
+do
+    if [[ "$file" =~ .*\.php$ ]]
+    then
+        if [ -e $PID_FILE ]
+        then
+            cabal_pid=`cat $PID_FILE`
+            echo "${file} changes, reload server." 
+            kill -USR1 $cabal_pid
+        fi
+    fi
+done
+

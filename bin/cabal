@@ -1,0 +1,61 @@
+#! /bin/bash
+scriptDir="$( cd "$( dirname "$0"  )" && pwd  )"
+
+DESC="cabal daemon"
+NAME=CabalServer
+
+PHP_PATH=php
+BIN_PATH=$scriptDir
+PIDFILE=$scriptDir/../var/cabal.pid
+RUN_ENV=
+
+while getopts f:e: OPTION  
+do  
+    case $OPTION in  
+        e)                         
+            RUN_ENV="-e $OPTARG"
+            ;;  
+        \?)
+            echo "error params $OPTARG"  
+            ;;  
+    esac  
+done
+do_start() {
+
+    $PHP_PATH $BIN_PATH/cabal.php $RUN_ENV || echo -n "$NAME already running"
+}
+do_stop() {
+    kill -TERM `cat $PIDFILE` || echo -n "$NAME not running"
+}
+do_reload() {
+    kill -USR1 `cat $PIDFILE` || echo -n "$NAME can't reload"
+}
+case "${!#}" in
+    start)
+    echo -n "Starting $NAME"
+    do_start
+    echo "."
+    ;;
+    stop)
+    echo -n "Stopping $NAME"
+    do_stop
+    echo "."
+    ;;
+    reload|graceful)
+    echo -n "Reloading configuration..."
+    do_reload
+    echo "."
+    ;;
+    restart)
+    echo -n "Restarting  $NAME"
+    do_stop
+    sleep 1
+    do_start
+    echo "."
+;;
+*)
+echo "Usage: $SCRIPTNAME [-e env] {start|stop|reload|restart}" >&2
+exit 3
+;;
+esac
+exit 
