@@ -1,14 +1,17 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 
-
-class Boot extends Cabal\Core\Application\Boot
+class Server extends \Cabal\Core\Server
 {
-    use Cabal\Core\Http\Boot\HasPlates;
-    use Cabal\DB\Boot\HasDB;
-    use Cabal\Core\Cache\Boot\HasCache;
+    use \Cabal\Core\Cache\ServerHasCache;
+    use Cabal\Core\Http\Server\HasPlates;
+    use Cabal\DB\ServerHasDB;
 }
 
-$options = getopt('e:');
-$boot = new Boot(dirname(__DIR__), array_get($options, 'e'));
+$boot = new \Cabal\Core\Boot();
+
+$server = $boot->createServer(dirname(__DIR__), array_get($options, 'e'), Server::class);
+
+
+return $server;
 

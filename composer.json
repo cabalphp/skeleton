@@ -16,8 +16,8 @@
     "require": {
         "php": "^7.0.0",
         "ext-swoole": "^2.0.0",
-        "cabalphp/cabal-core": "^0.1",
-        "cabalphp/cabal-db": "^0.1",
+        "cabalphp/cabal-core": "dev-dev",
+        "cabalphp/cabal-db": "dev-dev",
         "league/plates": "^3.3"
     },
     "repositories": {

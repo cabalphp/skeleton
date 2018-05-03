@@ -16,9 +16,8 @@ $route->get('/', function (Server $server, Request $request, $vars = []) {
     $response = new Response();
     $response->getBody()
         ->write(
-            $server->boot()
-                ->plates()
-                ->render('home', ['version' => $server->boot()->version()])
+            $server->plates()
+                ->render('home', ['version' => $server->version()])
         );
     return $response;
 });
