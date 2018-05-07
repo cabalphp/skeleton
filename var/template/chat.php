@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <title>Websocket</title>
     <script>
-        var ws = new WebSocket('ws://localhost:9501/ws/chat');
+        var port = location.port.length ? (':'+location.port):''; 
+        var ws = new WebSocket('ws://' + location.host + port + '/ws/chat');
         ws.onmessage = function (event) {
             var data = event.data;
             data = eval('(' + data + ')');
