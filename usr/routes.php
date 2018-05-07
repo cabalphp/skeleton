@@ -1,6 +1,5 @@
 <?php
 
-use Cabal\Core\Http\Server;
 use Cabal\Core\Http\Response;
 use Cabal\Core\Http\Request;
 
@@ -12,7 +11,7 @@ use Cabal\Core\Http\Request;
  */
 
 
-$route->get('/', function (Server $server, Request $request, $vars = []) {
+$route->get('/', function (\Server $server, Request $request, $vars = []) {
     $response = new Response();
     $response->getBody()
         ->write(
@@ -26,4 +25,7 @@ $route->group([
     'namespace' => 'App\Controller',
 ], function ($route) {
     $route->get('/test/{id:\d+}', 'DemoController@getTest');
+    $route->get('/chat', 'WebsocketController@chat');
+    $route->ws('/ws/chat', 'WebsocketController@on');
 });
+

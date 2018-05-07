@@ -1,13 +1,11 @@
 <?php
 namespace App\Controller;
 
-use Cabal\Core\Http\Server;
-use Cabal\Core\Http\Response;
 use Cabal\Core\Http\Request;
 
 class DemoController
 {
-    public function getTest(Server $server, Request $request, $var = [])
+    public function getTest(\Server $server, Request $request, $var = [])
     {
         return [
             'action' => __METHOD__,
