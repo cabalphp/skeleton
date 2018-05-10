@@ -24,25 +24,12 @@ class WebsocketController
 
         $fdSession = $request->fdSession();
         $fdSession['test'] = date('Y-m-d H:i:s');
+        $onlines = $server->onlines->add();
 
     }
 
     public function onOpen(\Server $server, Request $request)
     {
-        $server->push($request->fd(), json_encode([
-            'systemMsg' => "欢迎你加入聊天室！",
-        ]));
-
-
-        $onlines = $server->onlines->add();
-        foreach ($server->connections as $fd) {
-            $connectionInfo = $server->connection_info($fd);
-            if (isset($connectionInfo['websocket_status']) && $connectionInfo['websocket_status'] == WEBSOCKET_STATUS_FRAME) {
-                $server->push($fd, json_encode([
-                    'onlineNums' => $onlines,
-                ]));
-            }
-        }
     }
     public function onMessage(\Server $server, Frame $frame, $vars = [])
     {
@@ -57,8 +44,22 @@ class WebsocketController
             } else {
                 $fdSession['nickname'] = $nickname;
                 $server->push($frame->fd, json_encode([
-                    'systemMsg' => "昵称修改为 {$nickname} 成功！",
+                    'systemMsg' => "昵称修改为 " . $nickname . " 成功！",
                 ]));
+            }
+            return;
+        } elseif (strlen($data) >= 5 && strtolower(substr($data, 0, 5)) == '/join') {
+            $onlines = $server->onlines->get();
+            $server->push($frame->fd, json_encode([
+                'systemMsg' => "欢迎你加入聊天室！",
+            ]));
+            foreach ($server->connections as $fd) {
+                $connectionInfo = $server->connection_info($fd);
+                if (isset($connectionInfo['websocket_status']) && $connectionInfo['websocket_status'] == WEBSOCKET_STATUS_FRAME) {
+                    $server->push($fd, json_encode([
+                        'onlineNums' => $onlines,
+                    ]));
+                }
             }
             return;
         } elseif (strlen($data) < 1) {
@@ -68,13 +69,16 @@ class WebsocketController
             return;
         }
 
-        $nickname = isset($fdSession['nickname']) ? $fdSession['nickname'] : "游客{$frame->fd}";
+        $nickname = isset($fdSession['nickname']) ? $fdSession['nickname'] : "游客" . $frame->fd;
         foreach ($server->connections as $fd) {
-            $server->push($fd, json_encode([
-                'nickname' => $nickname,
-                'datetime' => date('Y-m-d H:i:s'),
-                'msg' => $frame->data,
-            ]));
+            $connectionInfo = $server->connection_info($fd);
+            if (isset($connectionInfo['websocket_status']) && $connectionInfo['websocket_status'] == WEBSOCKET_STATUS_FRAME) {
+                $server->push($fd, json_encode([
+                    'nickname' => $nickname,
+                    'datetime' => date('Y-m-d H:i:s'),
+                    'msg' => $frame->data,
+                ]));
+            }
         }
     }
 

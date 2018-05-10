@@ -13,14 +13,18 @@
                 var line = document.createElement('div');
                 line.className = 'sysMsg';
                 line.innerHTML = data.systemMsg;
+                document.getElementById('msg').appendChild(line);
             } else if ('onlineNums' in data) {
                 document.getElementById('online-nums').innerHTML = data.onlineNums;
             } else {
                 var line = document.createElement('div');
                 line.innerHTML = '<span>[' + data.nickname + ']</span> ' + data.msg + ' <span class="datetime">' + data.datetime + '</span>';
+                document.getElementById('msg').appendChild(line);
             }
-            document.getElementById('msg').appendChild(line);
         };
+        ws.onopen = function(event) {
+            ws.send('/join')
+        }
         function send(e, input) {
             if (e.charCode == 13) {
                 ws.send(input.value);
