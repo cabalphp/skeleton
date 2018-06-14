@@ -13,5 +13,10 @@ return [
         ],
     ],
 
+    // 'validator' => [
+    //     'lang' => 'zh-cn',
+    //     'langDir' => '',
+    // ],
+
     'swoole' => [],
 ];

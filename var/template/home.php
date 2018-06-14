@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CabalPHP - 基于Swoole的稳定、轻量、高效、全异步开源框架。</title>
+    <title>CabalPHP - 基于Swoole的轻量、高效、全异步开源框架。</title>
     <style>
         
         body,html{width:100%;height:100%;background:#fff;margin:0;padding:0;color:#34495e;font:15px/2 Source Sans Pro,Helvetica Neue,Arial,sans-serif}
@@ -33,7 +33,7 @@
         </h1>
         <blockquote>
             <p>是一个基于Swoole的
-                <strong>稳定、轻量、高效、全异步</strong>开源框架</p>
+                <strong>轻量、高效、全异步</strong>开源框架</p>
         </blockquote>
         <ul>
             <li></li>

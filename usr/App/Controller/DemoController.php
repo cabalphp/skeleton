@@ -5,12 +5,12 @@ use Cabal\Core\Http\Request;
 
 class DemoController
 {
-    public function getTest(\Server $server, Request $request, $var = [])
+    public function getTest(\Server $server, Request $request, $vars = [])
     {
         return [
             'action' => __METHOD__,
             'input' => $request->all(),
-            'var' => $var,
+            'vars' => $vars,
         ];
     }
 }

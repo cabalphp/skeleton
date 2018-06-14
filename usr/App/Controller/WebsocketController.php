@@ -7,7 +7,7 @@ use Cabal\Core\Http\Response;
 
 class WebsocketController
 {
-    public function chat(\Server $server, Request $request, $var = [])
+    public function chat(\Server $server, Request $request, $vars = [])
     {
         $response = new Response();
         $response->getBody()
