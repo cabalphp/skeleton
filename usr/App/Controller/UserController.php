@@ -11,6 +11,7 @@ class UserController extends FilterController
         return [
             'get' => [
                 'id' => ['required', 'integer'],
+                'email' => ['required', 'email', ['lengthMin', 4]],
             ],
         ];
     }
