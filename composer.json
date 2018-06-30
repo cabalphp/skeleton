@@ -19,11 +19,5 @@
         "cabalphp/cabal-core": "^0.1",
         "cabalphp/cabal-db": "^0.1",
         "league/plates": "^3.3"
-    },
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.org"
-        }
     }
 }
