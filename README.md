@@ -10,6 +10,7 @@ CabalPHP 是一个基于Swoole的**轻量、高效、全异步**开源框架。
 * 支持HTTP、TCP、websocket等多种协议
 * **完善数据库引擎，简单高效**（其他swoole框架几乎没有哦）
 * 易于学习，开发效率高，简单高效的数据库引擎
+* **自动生成API接口文档**
 * 使用IDE（Sublime Text/VSCode/PhpStorm等）有完整的代码提示
 
 
