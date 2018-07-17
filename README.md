@@ -3,6 +3,7 @@
 CabalPHP 是一个基于Swoole的**轻量、高效、全异步**开源框架。
 
 [中文文档](http://www.cabalphp.com/) 
+[English Document](http://www.cabalphp.lc/#/en/) 
 
 ## 亮点
 
@@ -23,7 +24,7 @@ CabalPHP 是一个基于Swoole的**轻量、高效、全异步**开源框架。
 
 ## 性能及压力测试
 
-作者已经在生产环境使用，腾讯云单机4H8G（CabalPHP+Redis两个服务）支持日活跃1000W+PV的统计业务，依靠Task进程异步将统计数据写入腾讯云MySQL。
+作者已经在生产环境使用，腾讯云两台4H8G（CabalPHP+Redis两个服务）支持日活跃3000W+PV的统计业务，依靠Task进程异步将统计数据写入腾讯云MySQL。
 
 **框架并发场景已经得到验证，复杂业务场景尚未验证。**
 
