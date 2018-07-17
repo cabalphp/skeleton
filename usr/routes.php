@@ -2,7 +2,6 @@
 
 use Cabal\Core\Http\Response;
 use Cabal\Core\Http\Request;
-// use Cabal\Core\Exception\BadRequestException;
 
 /**
  * @var \Cabal\Core\Application\Dispatcher $dispatcher
@@ -12,13 +11,13 @@ use Cabal\Core\Http\Request;
  */
 
 
-/*
+//*
 $dispatcher->registerExceptionHandler(function ($server, $ex, $chain, $request) {
-    if ($ex instanceof BadRequestException) {
+    if ($ex instanceof \Cabal\Core\Exception\BadRequestException) {
         return [
             'code' => 1,
             'msg' => $ex->getMessage(),
-            'msgs' => $ex->getMessages(),
+            // 'msgs' => $ex->getMessages(),
         ];
     }
     return [
@@ -48,4 +47,3 @@ $route->group([
     $route->get('/chat', 'WebsocketController@chat');
     $route->ws('/ws/chat', 'WebsocketController@on');
 });
-

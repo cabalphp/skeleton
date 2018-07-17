@@ -24,7 +24,6 @@ class WebsocketController
 
         $fdSession = $request->fdSession();
         $fdSession['test'] = date('Y-m-d H:i:s');
-        $onlines = $server->onlines->add();
 
     }
 
@@ -49,18 +48,9 @@ class WebsocketController
             }
             return;
         } elseif (strlen($data) >= 5 && strtolower(substr($data, 0, 5)) == '/join') {
-            $onlines = $server->onlines->get();
             $server->push($frame->fd, json_encode([
                 'systemMsg' => "欢迎你加入聊天室！",
             ]));
-            foreach ($server->connections as $fd) {
-                $connectionInfo = $server->connection_info($fd);
-                if (isset($connectionInfo['websocket_status']) && $connectionInfo['websocket_status'] == WEBSOCKET_STATUS_FRAME) {
-                    $server->push($fd, json_encode([
-                        'onlineNums' => $onlines,
-                    ]));
-                }
-            }
             return;
         } elseif (strlen($data) < 1) {
             // $server->push($frame->fd, json_encode([
@@ -84,15 +74,6 @@ class WebsocketController
 
     public function onClose(\Server $server, $fd, $reactorId)
     {
-        $onlines = $server->onlines->sub();
-        foreach ($server->connections as $fd) {
-            $connectionInfo = $server->connection_info($fd);
-            if (isset($connectionInfo['websocket_status']) && $connectionInfo['websocket_status'] == WEBSOCKET_STATUS_FRAME) {
-                $server->push($fd, json_encode([
-                    'onlineNums' => $onlines,
-                ]));
-            }
-        }
     }
 
 }

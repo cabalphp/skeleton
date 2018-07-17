@@ -1,4 +1,6 @@
 /composer.lock
+/composer.pub.json
+/composer.dev.json
 /.idea
 /vendor/
 /test/

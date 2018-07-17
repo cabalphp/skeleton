@@ -7,14 +7,9 @@ class Server extends \Cabal\Core\Server
     use Cabal\Core\Http\Server\HasPlates;
     use Cabal\DB\ServerHasDB;
 
-    public $onlines;
-
     public function __construct($root, $env)
     {
-
         parent::__construct($root, $env);
-
-        $this->onlines = new swoole_atomic(0);
     }
 }
 

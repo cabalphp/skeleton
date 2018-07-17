@@ -1,6 +1,7 @@
 <?php
 
 return [
+
     'host' => '0.0.0.0',
     'port' => '9501',
 
@@ -19,4 +20,10 @@ return [
     // ],
 
     'swoole' => [],
+
+    'document' => [
+        // 'enabled' => true,
+        'cdn' => 'unpkg.zhimg.com',
+        'name' => 'CabalPHP',
+    ],
 ];

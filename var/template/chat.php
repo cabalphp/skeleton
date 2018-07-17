@@ -14,8 +14,6 @@
                 line.className = 'sysMsg';
                 line.innerHTML = data.systemMsg;
                 document.getElementById('msg').appendChild(line);
-            } else if ('onlineNums' in data) {
-                document.getElementById('online-nums').innerHTML = data.onlineNums;
             } else {
                 var line = document.createElement('div');
                 line.innerHTML = '<span>[' + data.nickname + ']</span> ' + data.msg + ' <span class="datetime">' + data.datetime + '</span>';
@@ -82,8 +80,6 @@
             <input type="text" onkeypress="send(event,this)" placeholder="回车发送 /name 昵称 改名" />
         </div>
         <div class="infos">
-            在线人数：
-            <span id="online-nums"></span>
         </div>
     </div>
 </body>
