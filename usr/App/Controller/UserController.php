@@ -22,7 +22,7 @@ class UserController extends FilterController
      * @apiDescription 获取用户接口
      * - 支持换行
      * - 支持markdown
-     * @apiParam id string 用户ID
+     * @apiParam string id 用户ID
      * @apiSuccess int code 返回码，0表示成功
      * @apiSuccess string msg 提示信息
      * @apiSuccess object data 提示信息

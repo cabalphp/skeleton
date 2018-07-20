@@ -5,6 +5,9 @@ return [
     'host' => '0.0.0.0',
     'port' => '9501',
 
+    // 'logFile' => 'var/log/cabal.log',
+    // 'logLevel' => \Monolog\Logger::DEBUG,
+
     'cache' => [
         'default' => 'redis',
         'redis' => [
