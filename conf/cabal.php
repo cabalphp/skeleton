@@ -22,7 +22,9 @@ return [
     //     'langDir' => '',
     // ],
 
-    'swoole' => [],
+    'swoole' => [
+        'task_worker_num' => 1,
+    ],
 
     'document' => [
         // 'enabled' => true,

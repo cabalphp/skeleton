@@ -7,7 +7,6 @@ return [
     'port' => '9501',
 
     'swoole' => [
-        'daemonize' => 0,
         'worker_num' => 1,
     ],
 ];

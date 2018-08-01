@@ -2,7 +2,12 @@
 
 use Cabal\Core\Http\Response;
 use Cabal\Core\Http\Request;
+use Cabal\Core\Logger;
+use Cabal\Core\Chain;
 
+/**
+ * @var \Cabal\Core\Server $server
+ */
 /**
  * @var \Cabal\Core\Application\Dispatcher $dispatcher
  */
@@ -20,6 +25,7 @@ $dispatcher->registerExceptionHandler(function ($server, $ex, $chain, $request) 
             // 'msgs' => $ex->getMessages(),
         ];
     }
+    Logger::error($ex);
     return [
         'code' => 1,
         'error' => 'Internal Server Error',
@@ -47,3 +53,7 @@ $route->group([
     $route->get('/chat', 'WebsocketController@chat');
     $route->ws('/ws/chat', 'WebsocketController@on');
 });
+
+
+// 投递示例任务
+$server->task(new Chain('App\Task\ServerStart@task'));
