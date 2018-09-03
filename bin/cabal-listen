@@ -4,6 +4,12 @@ scriptDir="$( cd "$( dirname "$0"  )" && pwd  )"
 
 PID_FILE=$scriptDir/../var/cabal.pid
 
+if command -v inotifywait >/dev/null 2>&1; then
+    Watcher="inotifywait -mrq ./ -e modify --format %f"
+else
+    Watcher="fswatch"
+fi
+
 if [ -e $PID_FILE ]
 then
     cabal_pid=`cat $PID_FILE`
@@ -16,7 +22,8 @@ $scriptDir/cabal -e dev start &
 
 sleep 1
 echo "watching files..."
-fswatch $scriptDir/../ -i "*\\.php" | while read file
+
+$Watcher "${scriptDir}/../" | while read file
 do
     if [[ "$file" =~ .*\.php$ ]]
     then
@@ -28,4 +35,3 @@ do
         fi
     fi
 done
-
